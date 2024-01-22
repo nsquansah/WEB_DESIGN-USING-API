@@ -1,0 +1,92 @@
+/* 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(to right top, yellow, black, green, red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+.su {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: gray;
+    
+}
+.currency {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: gray;
+    margin-top: 2px;
+} */
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to right top, yellow, black, green, red);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .content {
+            width: 45%;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px;
+            background-image: url('bit.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: left;
+
+        }
+
+
+        .head1 {
+            
+            font-size: 30px;
+            
+        }
+
+        .content1 {
+            width: 45%;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px;
+            min-height: 60vh;
+            background-image: url('money2.avif'); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+
+        }

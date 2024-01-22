@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Border Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to right top, yellow, black, green, red);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap; /* Allow content to wrap to the next line */
+        }
+
+        .currency-item {
+            display: flex;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .currency-text {
+            margin-right: 5px;
+        }
+
+        .flag {
+            width: 30px;
+            height: auto;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+            margin: 20px 0;
+        }
+
+        .content {
+            width: 45%;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px;
+        }
+    </style>
+    <!-- Add links to flag images -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Welcome to Gradient Border Page</h1>
+            <ul>
+                <li class="currency-item">USD <span class="currency-text">United States</span><img src="https://via.placeholder.com/30x20" alt="USA Flag" class="flag"></li>
+                <li class="currency-item">CAD <span class="currency-text">Canada</span><img src="https://via.placeholder.com/30x20" alt="Canada Flag" class="flag"></li>
+                <li class="currency-item">EUR <span class="currency-text">Europe</span><img src="https://via.placeholder.com/30x20" alt="Europe Flag" class="flag"></li>
+                <li class="currency-item">SGD <span class="currency-text">Singapore</span><img src="https://via.placeholder.com/30x20" alt="Singapore Flag" class="flag"></li>
+                <li class="currency-item">MYR <span class="currency-text">Malaysia</span><img src="https://via.placeholder.com/30x20" alt="Malaysia Flag" class="flag"></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="content">
+            <!-- First section content goes here -->
+            <h2>Section 1</h2>
+            <p>This is the content of the first section.</p>
+        </div>
+
+        <div class="content">
+            <!-- Second section content goes here -->
+            <h2>Section 2</h2>
+            <p>This is the content of the second section.</p>
+        </div>
+    </div>
+
+</body>
+</html>
