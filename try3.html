@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<form id="currencyForm">
+    <label for="fromCurrency">From:</label><br>
+    <input class="button1" type="text" id="fromCurrency" name="fromCurrency" placeholder="USD"><br><br>
+    <label for="toCurrency">To:</label><br>
+    <input class="button2" type="text" id="toCurrency" name="toCurrency" placeholder="EUR"><br><br>
+    <label for="amount">Amount:</label><br>
+    <input class="button2" type="number" id="amount" name="amount" value="1" min="0.01" step="0.01"><br><br>
+
+    <input class="button4" type="button" value="Submit" onclick="convertCurrency()"><br><br>
+    <label for="results">Results:</label><br>
+    <input class="results" type="text" id="results" name="results" readonly><br><br>
+</form>
+
+<script>
+    function convertCurrency() {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Input validation
+        var fromCurrency = $('#fromCurrency').val().trim().toUpperCase();
+        var toCurrency = $('#toCurrency').val().trim().toUpperCase();
+        var amount = $('#amount').val().trim();
+
+        if (fromCurrency === '' || toCurrency === '' || amount === '') {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        // Ajax request to get exchange rates
+        $.ajax({
+            method: 'GET',
+            url: 'https://currency-exchange.p.rapidapi.com/exchange',
+            data: {
+                from: fromCurrency,
+                to: toCurrency,
+                q: amount
+            },
+            headers: {
+                'X-RapidAPI-Key': '924d9eaa55mshf3a048d4fec13c5p1fb66ajsnce8946928b9b',
+                'X-RapidAPI-Host': 'currency-exchange.p.rapidapi.com'
+            },
+            success: function(response) {
+                console.log(response);
+
+                // Extract converted amount
+                var convertedAmount = response * amount;
+
+                // Round to 2 decimal places
+                convertedAmount = convertedAmount.toFixed(2);
+
+
+                // Display results
+                $('#results').val(convertedAmount);
+            },
+            error: function(error) {
+                console.error(error);
+                alert('Error retrieving exchange rates. Please try again later.');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -30,19 +30,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gradient Border Page</title>
    <link rel="stylesheet" href="style.css">
+   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
     <header>
         <h1>CURRENCY CONVERTER</h1>
-        <ul>
+        <ul class="list" id="supported_cur">
 
-            <p>USD  <img src="flags/1x1/us.svg" alt="flag" width="20px" height="20px"></a></p>
-            <p>EUR  <img src="flags/1x1/eu.svg" alt="flag" width="20px" height="20px"></a></p>
-            <p>GBP  <img src="flags/1x1/gb.svg" alt="flag" width="20px" height="20px"></a></p>
-            <p>INR  <img src="flags/1x1/in.svg" alt="flag" width="20px" height="20px"></a></p>
-            <p>AUD  <img src="flags/1x1/au.svg" alt="flag" width="20px" height="20px"></a></p>
-            <p>CAD  <img src="flags/1x1/ca.svg" alt="flag" width="20px" height="20px"></a></p>
+            <!-- <p>USD  <img src="flags/1x1/us.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>EUR  <img src="flags/1x1/eu.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>GBP  <img src="flags/1x1/gb.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>INR  <img src="flags/1x1/in.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>AUD  <img src="flags/1x1/au.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>CAD  <img src="flags/1x1/ca.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>SGD  <img src="flags/1x1/sg.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>CNF  <img src="flags/1x1/cn.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>MYR  <img src="flags/1x1/my.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>JPY  <img src="flags/1x1/jp.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>NZD  <img src="flags/1x1/nz.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>THB  <img src="flags/1x1/th.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>DKK  <img src="flags/1x1/dk.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>MXN  <img src="flags/1x1/mx.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>VND  <img src="flags/1x1/vn.svg" alt="flag" width="20px" height="10px"></a></p>
+            <p>TWD  <img src="flags/1x1/tw.svg" alt="flag" width="20px" height="10px"></a></p> -->
+
 
         </ul>
     </header>
@@ -51,23 +63,155 @@
         <div class="content1">
             
             <h2 class="head1">CONVERT YOUR CURRENCY HERE!</h2>
-            <form action="/action_page.php">
+            <form>
                 <label for="fname">From:</label><br>
-                <input type="text" id="fname" name="fname" value="$1"><br><br><br>
+                <input class="button1" type="text" id="fname" name="fname" value="$"><br><br><br>
                 <label for="lname">To:</label><br>
-                <input type="text" id="lname" name="lname" value="1.000"><br><br>
-                <input type="submit" value="Submit">
+                <input class="button2" type="text" id="lname" name="lname" value="$"><br><br>
+                <label for="lname">Amount:</label><br>
+                <input class="button2" type="text" id="lname" name="lname" value="1"><br><br>
+
+                <input class="button4" type="submit" value="Submit"><br><br>
+                <label for="lname">Results:</label><br>
+                <input class="results" type="text" id="lname" name="lname" value="1"><br><br>
+
+               
               </form> 
+
     
         </div>
 
         <div class="content">
         
             <h2>BITCOIN MINNING HERE!</h2>
-            <p>This is the content of the second section.</p>
+            
+            <form action="/action_page.php">
+                <label for="fname"><strong>UPDATED AT:</strong></label><br>
+                <input class="button3" type="text" id="fname" name="fname" value="0:00"><br><br><br>
         </div>
     </div>
 
 </body>
+
+<script>
+    // Set your variables
+    // retrieve from config.json
+    var configs = {
+        apiKey: '924d9eaa55mshf3a048d4fec13c5p1fb66ajsnce8946928b9b',
+        apiHost: 'currency-exchange.p.rapidapi.com'
+    }
+    var apiKey = configs.apiKey;
+
+    var currencies = {
+        'USD': '<p>USD  <img src="flags/1x1/us.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'EUR': '<p>EUR  <img src="flags/1x1/eu.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'GBP': '<p>GBP  <img src="flags/1x1/gb.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'INR': '<p>INR  <img src="flags/1x1/in.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'AUD': '<p>AUD  <img src="flags/1x1/au.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'CAD': '<p>CAD  <img src="flags/1x1/ca.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'SGD': '<p>SGD  <img src="flags/1x1/sg.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'CNF': '<p>CNF  <img src="flags/1x1/cn.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'MYR': '<p>MYR  <img src="flags/1x1/my.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'JPY': '<p>JPY  <img src="flags/1x1/jp.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'NZD': '<p>NZD  <img src="flags/1x1/nz.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'THB': '<p>THB  <img src="flags/1x1/th.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'DKK': '<p>DKK  <img src="flags/1x1/dk.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'MXN': '<p>MXN  <img src="flags/1x1/mx.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'VND': '<p>VND  <img src="flags/1x1/vn.svg" alt="flag" width="20px" height="10px"></a></p>',
+        'TWD': '<p>TWD  <img src="flags/1x1/tw.svg" alt="flag" width="20px" height="10px"></a></p>'
+    }
+
+    // get supported currencies
+
+    function getSups(supCur, currencies) {
+        var supsList = '';
+        for (var i = 0; i < supCur.length; i++) {
+            // console.log(supCur[i]);
+            if (currencies[supCur[i]] === undefined) {
+                continue;
+            }
+            supsList += currencies[supCur[i]];
+        }
+        return supsList;
+    }
+
+    function getSupCur(apiKey, currencies) {
+        $.ajax({
+        method: 'GET',
+        url: 'https://currency-exchange.p.rapidapi.com/listquotes',
+        headers: {
+            'X-RapidAPI-Key': apiKey,
+            'X-RapidAPI-Host': 'currency-exchange.p.rapidapi.com'
+        },
+        success: function(response) {
+            // console.log(response);
+            // Extract variable from response
+            var quoteList = JSON.parse(response);
+            // console.log('Quote List:', quoteList);
+
+            var supsList = getSups(quoteList, currencies);
+
+            $('#supported_cur').html(supsList);
+
+            // Now you can use the quoteList variable as needed
+        },
+        error: function(error) {
+            console.error(error);
+            // Handle the error here
+        }
+    });
+    }
+
+
+    function convertCurrency() {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Input validation
+        var fromCurrency = $('#fromCurrency').val().trim().toUpperCase();
+        var toCurrency = $('#toCurrency').val().trim().toUpperCase();
+        var amount = $('#amount').val().trim();
+
+        if (fromCurrency === '' || toCurrency === '' || amount === '') {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        // Ajax request to get exchange rates
+        $.ajax({
+            method: 'GET',
+            url: 'https://currency-exchange.p.rapidapi.com/exchange',
+            data: {
+                from: fromCurrency,
+                to: toCurrency,
+                q: amount
+            },
+            headers: {
+                'X-RapidAPI-Key': '924d9eaa55mshf3a048d4fec13c5p1fb66ajsnce8946928b9b',
+                'X-RapidAPI-Host': 'currency-exchange.p.rapidapi.com'
+            },
+            success: function(response) {
+                console.log(response);
+
+                // Extract converted amount
+                var convertedAmount = response * amount;
+
+                // Round to 2 decimal places
+                convertedAmount = convertedAmount.toFixed(2);
+
+
+                // Display results
+                $('#results').val(convertedAmount);
+            },
+            error: function(error) {
+                console.error(error);
+                alert('Error retrieving exchange rates. Please try again later.');
+            }
+        });
+    }
+
+    // call functions
+    getSupCur(apiKey, currencies);
+</script>
 </html>
 
